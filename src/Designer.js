@@ -378,6 +378,7 @@ class Designer extends Component {
     let canvas = this.getCanvas();
     let {width, height, canvasOffsetX, canvasOffsetY} = canvas;
     let {background, objects, svgStyle, objectTypes} = this.props;
+    let {selectedObjectIndex} = this.state;
 
     return (
       <SVGRenderer
@@ -390,7 +391,9 @@ class Designer extends Component {
          objectTypes={objectTypes}
          objectRefs={this.objectRefs}
          onRender={(ref) => this.svgElement = ref}
-         onMouseDown={this.newObject.bind(this)} />
+         onMouseDown={this.newObject.bind(this)}
+         selectedObject={objects[selectedObjectIndex]}
+      />
     );
   }
 
@@ -570,7 +573,7 @@ class Designer extends Component {
           </div>
 
           {/* Right Panel: Displays text, styling and sizing tools */}
-          {showPropertyPanel && (
+          {showPropertyPanel && objectWithInitial && (
             <PanelList
               id={this.props.id}
               object={objectWithInitial}

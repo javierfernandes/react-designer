@@ -11,13 +11,18 @@ class SVGRenderer extends Component {
   }
 
   renderObject(object, index) {
-    let {objectRefs, onMouseOver} = this.props;
+    let {objectRefs, onMouseOver, selectedObject} = this.props;
     let Renderer = this.getObjectComponent(object.type);
     return (
-      <Renderer onRender={(ref) => objectRefs[index] = ref}
+      <Renderer
+        onRender={(ref) => objectRefs[index] = ref}
         onMouseOver={onMouseOver.bind(this, index)}
-        object={object}  key={index} index={index} />
-      );
+        object={object}
+        key={index}
+        index={index}
+        isSelected={selectedObject === object}
+      />
+    );
   }
 
   render() {
@@ -43,7 +48,7 @@ class SVGRenderer extends Component {
          width={width}
          height={height}
          style={style}
-         isRoot={true}
+        //  isRoot={true}
          >
         {objects.map(this.renderObject.bind(this))}
       </svg>
