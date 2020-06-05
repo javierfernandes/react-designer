@@ -378,6 +378,7 @@ class Designer extends Component {
     let canvas = this.getCanvas();
     let {width, height, canvasOffsetX, canvasOffsetY} = canvas;
     let {background, objects, svgStyle, objectTypes} = this.props;
+    let {selectedObjectIndex} = this.state;
 
     return (
       <SVGRenderer
@@ -390,7 +391,8 @@ class Designer extends Component {
          objectTypes={objectTypes}
          objectRefs={this.objectRefs}
          onRender={(ref) => this.svgElement = ref}
-         onMouseDown={this.newObject.bind(this)} />
+         onMouseDown={this.newObject.bind(this)}
+         onUpdate={(index, object) => this.updateObject(index, object)} />
     );
   }
 

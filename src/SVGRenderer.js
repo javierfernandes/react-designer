@@ -11,12 +11,13 @@ class SVGRenderer extends Component {
   }
 
   renderObject(object, index) {
-    let {objectRefs, onMouseOver} = this.props;
+    let {objectRefs, onMouseOver, onUpdate} = this.props;
     let Renderer = this.getObjectComponent(object.type);
     return (
       <Renderer onRender={(ref) => objectRefs[index] = ref}
         onMouseOver={onMouseOver.bind(this, index)}
-        object={object}  key={index} index={index} />
+        object={object}  key={index} index={index}
+        onUpdate={newObject => onUpdate(index, newObject)} />
       );
   }
 
